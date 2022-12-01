@@ -15,9 +15,8 @@ class _UpdateFirebaseDataState extends State<UpdateFirebaseData> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance
-          .collection('dilanketi')
-          .snapshots(), // fire base bağlantısını yaptık
+      stream: FirebaseFirestore.instance.collection('dilanketi').snapshots(),
+      // fire base bağlantısını yaptık
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return const LinearProgressIndicator();
@@ -38,7 +37,7 @@ class _UpdateFirebaseDataState extends State<UpdateFirebaseData> {
   }
 
   _buildListItem(BuildContext context, DocumentSnapshot data) {
-    final kayit = Anket.fromSapshot(data);
+    final kayit = Anket.fromSnapshot(data);
 
     return Padding(
         key: ValueKey(kayit.isim),
@@ -71,7 +70,7 @@ class Anket {
         isim = map["isim"],
         oy = map["oy"];
 
-  Anket.fromSapshot(DocumentSnapshot? snapshot)
+  Anket.fromSnapshot(DocumentSnapshot? snapshot)
       : this.fromMap(snapshot?.data(), reference: snapshot?.reference);
 
   @override
